@@ -1,0 +1,22 @@
+import numpy as np
+
+bins = np.zeros(10, dtype=int)
+
+exam_points = np.random.normal(60, 20, 67)
+exam_points = np.rint(exam_points).astype(int)
+exam_points = np.clip(exam_points, 0, 99)  # Begrenzung auf 0-99
+
+# 3. Fülle die Bins basierend auf den Punkten
+for i in exam_points:
+    bin_index = i // 10  # Ganzzahlige Division für die Bins (0-9, 10-19, ..., 90-99)
+    bins[bin_index] += 1
+
+# 4. Fenster-Titel setzen
+print("\nHistogram\n")
+
+# 5. Ausgabe des Histogramms im gewünschten Format
+for i, count in enumerate(bins):
+    #print(i, count)
+    lower_bound = i * 10
+    upper_bound = lower_bound + 9
+    print(f"{lower_bound}-{upper_bound}: {'*' * count}")
